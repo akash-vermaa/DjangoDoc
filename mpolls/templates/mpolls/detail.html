@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block title %}
+App - Details
+{% endblock %}
+
+{% block app %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>{{question.question_text}}</legend>
+            {% if error_msg %}
+                <p><strong>{{error_msg}}</strong></p>
+            {% endif %}
+            {% for choice in question.choice_list.all %}
+                <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" />
+                <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br />
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Vote" />
+    </form>
+{% endblock %}

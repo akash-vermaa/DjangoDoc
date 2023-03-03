@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}Poll - App{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'mpolls/style.css' %}"/>
+</head>
+
+<body>
+    {% block navigation %}
+    <nav>
+        <img src="#" alt="logo" />
+        <ul>
+            <li>Home</li>
+            <li>Store</li>
+            <li>Products</li>
+            <li>user</li>
+        </ul>
+    </nav>
+    {% endblock %}
+    {% block app %}
+        {% if latest_question_list %}
+            <ul>
+                {% for question in latest_question_list %}
+                    <li> <a href="#">{{ question.question_text }}</a> </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <p>Polls are not available</p>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>
